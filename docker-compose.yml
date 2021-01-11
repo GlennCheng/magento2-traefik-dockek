@@ -34,20 +34,21 @@ services:
     command: --api
     command: --docker
     command:
-      - "--log.level=INFO"
-#      - "--configFile=/traefik.toml"
-      - "--api"
+        #- "--log.level=INFO"
+      - "--log.level=DEBUG"
+        #- "--configFile=/traefik.toml"
       - "--api.insecure=true"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.websecure.address=:443"
       - "--entrypoints.web.address=:80"
       - "--entrypoints.mysql.address=:3306"
-      - "--certificatesResolvers.letsEncrypt.acme.tlsChallenge=true"
-      - "--certificatesResolvers.letsEncrypt.acme.email=glenn@astralwebinc.com"
+      - "--certificatesResolvers.letsEncrypt.acme.tlschallenge=true"
+        #- "--certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
+      - "--certificatesResolvers.letsEncrypt.acme.email=glenn@branch8.com"
       - "--certificatesResolvers.letsEncrypt.acme.storage=/letsencrypt/acme.json"
-      - "--certificatesResolvers.letsEncrypt.acme.httpChallenge=true"
-      - "--certificatesResolvers.letsEncrypt.acme.httpChallenge.entryPoint=web"
+        #- "--certificatesResolvers.letsEncrypt.acme.httpChallenge=true"
+        #- "--certificatesResolvers.letsEncrypt.acme.httpChallenge.entryPoint=web"
 
     networks:
       - "traefik_default"
@@ -58,7 +59,7 @@ services:
       - "8080:8080"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
-      - "./letsencrypt/acme.json:/letsencrypt/acme.json"
+      - "./letsencrypt:/letsencrypt"  
     labels:
       - "traefik.enable=true"
       - "traefik.frontend.rule=Host:traefik.your.domain"
