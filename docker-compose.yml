@@ -47,8 +47,8 @@ services:
         #- "--certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
       - "--certificatesResolvers.letsEncrypt.acme.email=glenn@branch8.com"
       - "--certificatesResolvers.letsEncrypt.acme.storage=/letsencrypt/acme.json"
-        #- "--certificatesResolvers.letsEncrypt.acme.httpChallenge=true"
-        #- "--certificatesResolvers.letsEncrypt.acme.httpChallenge.entryPoint=web"
+      - "--certificatesResolvers.letsEncrypt.acme.httpChallenge=true"
+      - "--certificatesResolvers.letsEncrypt.acme.httpChallenge.entryPoint=web"
 
     networks:
       - "traefik_default"
